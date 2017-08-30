@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+<p>댓글</p>
+<form action='/posts/show/<%=@post.id%>/comments/create' method='post'>
+  <input type='text' name='input_comment'>
+  <input type='submit'>
+</form>
+<hr>
+<% @comments.each do |comment|%>
+   <p>-> <%= comment.content %> 
+     <a href='/posts/show/<%=@post.id%>/comments/destroy/<%= comment.id%>'
+        data-method='post' 
+        data-confirm='댓글 삭제'>
+        [x]</a>
+   </p>
+<%end%>
+<hr>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
